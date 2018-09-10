@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-import database_backend
+
 
 app = Flask(__name__)
 
@@ -8,13 +8,17 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/temperature')#Search interface, same elmeents used on search-result
-def temperature():
-    return render_template('temperature.html')
+@app.route('/login')#Login Interface
+def login():
+    return render_template('loginform.html')
 
-@app.route('/googlemaps')
-def googlemaps():
-    return render_template('index.html')
+@app.route('/signup')#Login Interface
+def signup():
+    return render_template('signupform.html')
+
+@app.route('/forgot_password')
+def forrgot_password():
+    return render_template('forgot_password.html')
 
 @app.route('/aboutme')
 def aboutme():
@@ -32,4 +36,4 @@ def process_place():
     return render_template("place.html", search = search, temp = temp)"""
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()

@@ -12,7 +12,6 @@ class Database():
         self.phone = phone
         self.password = password
     def create(self):
-        
         try:
             c.execute('''CREATE TABLE users
             (email text, password text)''')

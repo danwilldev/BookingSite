@@ -27,7 +27,6 @@ class Database():
     def hashpw(self):
         self.password_hash =  sha256_crypt.encrypt(self.password)
     def add(self):
-        
         c.execute('INSERT INTO users(email, password) VALUES(?,?)', (self.email, self.password_hash))
         c.execute('INSERT INTO usersinfo(firstname, lastname, phone) VALUES(?,?,?)', (self.firstname, self.lastname, self.phone))
         print('User inserted {} {}'.format(self.email, self.password_hash))

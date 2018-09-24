@@ -1,8 +1,20 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash
 from database import Database #Custom Database Script
+from flask_wtf import Form
+from wtforms import Form, StringField, PasswordField, BooleanField, SubmitField, TextField, validators
+from wtforms.validators import DataRequired
 
-
+DEBUG = True
 app = Flask(__name__)
+app.config.from_object(__name__)
+app.config['SECRET_KEY'] = 'REPLACEWITHSECUREKEYDAN'
+
+class ReusableForm(Form):
+    firstname = TextField('firstname:', validators=[validators.required()])
+    lastname = TextField('lastname:', validators=[validators.required()])
+    phone = TextField('phone:', validators=[validators.required()])
+    password = PasswordField('password:', validators=[validators.required(), validators.Length(min=6)])
+    passwordconfirm = PasswordField('passwordconfirm:', validators=[validators.required(), validators.Length(min=6)])
 
 """From this point @app.route signifies adress call that triggers templates"""
 @app.route('/')#Defult view of webapp
@@ -13,9 +25,27 @@ def index():
 def login():
     return render_template('loginform.html')
 
-@app.route('/signup')#Login Interface
+@app.route('/signup', methods=['GET', 'POST'])#Login Interface
 def signup():
-    return render_template('signupform.html')
+    form = ReusableForm(request.form)
+    if request.method == 'POST':
+        
+        firstname=request.form['firstname']
+        lastname=request.form['lastname']
+        email=request.form['phone']
+        password=request.form['password']
+        passwordconfirm=request.form['passwordconfirm']
+        print(firstname)
+
+        if form.validate() and password == passwordconfirm:
+            flash('You have signed up!')
+        elif password != passwordconfirm:
+            flash('Try Again - Password Didn\'t Match.')
+        elif len(password) < 6:
+            flash('Try Again - Password Needs To Be Over 6 Characters.')
+        else:
+            flash('Error: All the form fields are required. ')
+    return render_template('signupform.html', form=form)
 
 @app.route('/forgot_password')
 def forrgot_password():
@@ -28,13 +58,6 @@ def aboutme():
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
-
-"""@app.route('/search-request', methods = ['POST'])
-def process_place():
-    search = request.form['search']
-    print("Recieved request to check temp of city '" + search + "'")
-    temp = weatherscrape.getdata(str(search))
-    return render_template("place.html", search = search, temp = temp)"""
 
 if __name__ == "__main__":
     app.run()

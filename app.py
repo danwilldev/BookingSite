@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request, flash, redirect, url_for
 from database import Database #Custom Database Script
 from flask_wtf import Form
 from wtforms import Form, StringField, PasswordField, BooleanField, SubmitField, TextField, validators
@@ -21,11 +21,21 @@ class ReusableForm(Form):
 def index():
     return render_template('index.html')
 
-@app.route('/login')#Login Interface
+@app.route('/login', methods=['GET', 'POST'])#Login Interface
 def login():
-    return render_template('loginform.html')
+    form = ReusableForm(request.form)
+    if request.method == 'POST':
+        email=request.form['email']
+        password=request.form['password']
 
-@app.route('/signup', methods=['GET', 'POST'])#Login Interface
+        if Database.check(email, password) == True:
+            return redirect(url_for('index'))
+        else:
+            flash('User Not Found.')
+
+    return render_template('loginform.html', form=form)
+
+@app.route('/signup', methods=['GET', 'POST'])#Sign Up Interface
 def signup():
     form = ReusableForm(request.form)
     if request.method == 'POST':
@@ -36,7 +46,6 @@ def signup():
         phone=request.form['phone']
         password=request.form['password']
         passwordconfirm=request.form['passwordconfirm']
-        print(firstname)
         count.extend([firstname, lastname, email, phone, password, passwordconfirm])
         total = 0
         for x in count:

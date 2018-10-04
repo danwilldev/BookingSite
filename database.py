@@ -1,6 +1,6 @@
 import sqlite3
 from passlib.hash import sha256_crypt
-conn = sqlite3.connect('data/database.db')
+conn = sqlite3.connect('/data/database.db', check_same_thread=False)
 c = conn.cursor()
 passwordhash = sha256_crypt.hash("djhewufhu23r82urjfnjkdshfkjh8ry8yuwhe23rj") #hash
 
@@ -30,17 +30,16 @@ class Database():
         c.execute('INSERT INTO usersinfo(firstname, lastname, phone) VALUES(?,?,?)', (self.firstname, self.lastname, self.phone))
         print('User inserted {} {}'.format(self.email, self.password_hash))
         conn.commit()
-    def check(self, email, password):
-        c.execute('SELECT * FROM users WHERE email=?',(email,))
-        user = c.fetchone()
-        if sha256_crypt.verify(password, user[1]) == True:
-            return True
-        else:
+    @staticmethod
+    def check(email, password):
+        try:
+            c.execute('SELECT * FROM users WHERE email=?',(email,))
+            user = c.fetchone()
+            if sha256_crypt.verify(password, user[1]) == True:
+                return True
+            else:
+                return False
+        except:
             return False
-    
-        
-"""db = Database("danwill1210@gmail.com", "Dan", "Will", "07956775948" , "Goon1234pw")
-db.create()
-db.hashpw()
-db.add()
-db.check("danwill1210@gmail.com", "Goon1234pw") TEST INPUTS"""
+
+            

@@ -1,6 +1,6 @@
 import sqlite3
 from passlib.hash import sha256_crypt
-conn = sqlite3.connect('/data/database.db', check_same_thread=False)
+conn = sqlite3.connect('data/database.db', check_same_thread=False)
 c = conn.cursor()
 passwordhash = sha256_crypt.hash("djhewufhu23r82urjfnjkdshfkjh8ry8yuwhe23rj") #hash
 

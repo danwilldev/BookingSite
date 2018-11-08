@@ -51,12 +51,12 @@ class Database():
 
     @staticmethod
     def check(email, password):
-         try:
+        try:
             c.execute('SELECT * FROM users WHERE email=?',(email,))
             item = c.fetchone()
-            if sha256_crypt.verify(password, user[2]) == True:
+            if sha256_crypt.verify(password, item[2]) == True:
                 return True
             else:
                 return False
-            except:
-                return False
+        except:
+            return False

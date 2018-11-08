@@ -68,7 +68,7 @@ def signup():
             flash('Error: Something went wrong there, inform Dan.')
     return render_template('signupform.html', form=form)
 
-@app.route('/forgot_password')
+@app.route('/forgot_password', methods=['GET', 'POST'])
 def forrgot_password():
     return render_template('forgot_password.html')
 

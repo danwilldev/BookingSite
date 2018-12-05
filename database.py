@@ -37,8 +37,8 @@ class Database():
         userid = str(uuid.uuid4())
         c.execute('SELECT * FROM users WHERE userid=?', (userid,))
         item = c.fetchone()
-        while str(item[0]) == userid:
-            userid = str(uuid.uuid4())
+        #while str(item[0]) == userid:
+         #   userid = str(uuid.uuid4())
         conn.commit()
 
         c.execute('INSERT INTO users(userid, email, password) VALUES(?,?,?)',

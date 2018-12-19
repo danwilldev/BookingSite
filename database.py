@@ -36,7 +36,7 @@ class Database():
         # Making a random uuid using the python uuid moduel, 4 is the only truly random.
         userid = str(uuid.uuid4())
         c.execute('SELECT * FROM users WHERE userid=?', (userid,))
-        item = c.fetchone()
+        #item = c.fetchone()
         #while str(item[0]) == userid:
          #   userid = str(uuid.uuid4())
         conn.commit()

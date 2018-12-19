@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block title %}Find Us{% endblock %}
+{% block body %}
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <div id="map" style="height: 85%; width: 98%; left: 1%""></div>
+    <script>
+      var shefford = {lat: 52.0355154, lng: -0.3427786};
+      var shefford = {lat: 52.0355154, lng: -0.3427786};
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 52.0098, lng: -0.4251},
+          zoom: 10
+        });
+        var marker = new google.maps.Marker({position: shefford, map: map});
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQp4E8YWNAADNdxGjeZqWgyNzSKHi4-is&callback=initMap"
+    async defer></script>
+{% endblock %}

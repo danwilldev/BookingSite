@@ -72,13 +72,13 @@ def signup():
 def forrgot_password():
     return render_template('forgot_password.html')
 
-@app.route('/aboutme')
+@app.route('/about')
 def aboutme():
-    return render_template('index.html')
+    return render_template('about.html')
 
-@app.route('/contact')
+@app.route('/location')
 def contact():
-    return render_template('contact.html')
+    return render_template('googlemaps.html')
 
 if __name__ == "__main__":
     app.run()

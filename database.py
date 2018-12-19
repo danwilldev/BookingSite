@@ -2,7 +2,7 @@ import sqlite3
 from passlib.hash import sha256_crypt
 import uuid
 conn = sqlite3.connect(
-    'data/database.db', check_same_thread=False)
+    'C:/Users/danwi/Desktop/BookingSite-master/BookingSite-masterCode/data/database.db', check_same_thread=False)
 c = conn.cursor()
 passwordhash = sha256_crypt.hash(
     "djhewufhu23r82urjfnjkdshfkjh8ry8yuwhe23rj")  # hash
@@ -36,6 +36,7 @@ class Database():
         # Making a random uuid using the python uuid moduel, 4 is the only truly random.
         userid = str(uuid.uuid4())
         c.execute('SELECT * FROM users WHERE userid=?', (userid,))
+        #item = c.fetchone()
         #while str(item[0]) == userid:
          #   userid = str(uuid.uuid4())
         conn.commit()

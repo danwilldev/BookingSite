@@ -4,11 +4,36 @@
 {% extends "layout.html" %}
 {% block title %}{% endblock %}
 {% block body %}
-<div class="jumbotron text-center">
-  <h1>Coming Soon.</h1>
-  <p>Last Updated 19.09.18</p>
+<div class="container text-center">
+  <h2>Upcoming Classes</h2>
 </div>
-<div class="container-fluid text-center">
-    <h1>Coming Soon</h1>
+{% for item in title %}
+<div class="container">           
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>{{item}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Class Name</td>
+        <td>Class Time</td>
+        <td>Class Location</td>
+      </tr>
+      <tr>
+        <td>Mary</td>
+        <td>Moe</td>
+        <td>mary@example.com</td>
+      </tr>
+      <tr>
+        <td>July</td>
+        <td>Dooley</td>
+        <td>july@example.com</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
+{% endfor %}
+
 {% endblock %}

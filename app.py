@@ -19,7 +19,8 @@ class ReusableForm(Form):
 """From this point @app.route signifies adress call that triggers templates"""
 @app.route('/')#Defult view of webapp
 def index():
-    return render_template('index.html')
+    title = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+    return render_template('index.html', title = title)
 
 @app.route('/login', methods=['GET', 'POST'])#Login Interface
 def login():

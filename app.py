@@ -29,7 +29,7 @@ def login():
         email=request.form['email']
         password=request.form['password']
 
-        if Database.check(email, password) == "True":
+        if Database.check(email, password) == True:
             return redirect(url_for('index', loggedin= 1))
         else:
             flash('User Not Found.')

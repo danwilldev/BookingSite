@@ -2,7 +2,7 @@ import sqlite3
 from passlib.hash import sha256_crypt
 import uuid
 conn = sqlite3.connect(
-    'data/database.db', check_same_thread=False)
+    'C:/Users/danwi/Desktop/database.db', check_same_thread=False)
 c = conn.cursor()
 passwordhash = sha256_crypt.hash(
     "djhewufhu23r82urjfnjkdshfkjh8ry8yuwhe23rj")  # hash
@@ -58,5 +58,24 @@ class Database():
                 return True
             else:
                 return False
+        except:
+            return False
+
+    @staticmethod
+    def uuid(email):
+        try:
+            c.execute('SELECT * FROM users WHERE email=?',(email,))
+            item = c.fetchone()
+            return str(item[0])
+        except:
+            return False
+
+    @staticmethod
+    def userdetails(uuid):
+        try:
+            c.execute('SELECT * FROM usersinfo WHERE userid=?',(uuid,))
+            item = c.fetchone()
+            details = [item[1], item[2], item[3]]
+            return details
         except:
             return False

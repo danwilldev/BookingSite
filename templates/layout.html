@@ -16,17 +16,24 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/">SignMeUp</a>
+      <a class="navbar-brand" href="/">Little Emz Fitness</a>
     </div>
     <ul class="nav navbar-nav">
       <li><a href="/">Home</a></li>
       <li><a href="/location">Locations</a></li>
       <li><a href="/about">About</a></li>
     </ul>
+    {% if loggedin == 1 %}
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      <li><a href="/account"><span class="glyphicon glyphicon-user text-primary"></span> My Account</a></li>
+      <li><a href="/logout"><span class="glyphicon glyphicon-log-out text-danger"></span> Log Out</a></li>
     </ul>
+    {% else %}
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="/signup"><span class="glyphicon glyphicon-user text-primary"></span> Sign Up</a></li>
+      <li><a href="/login"><span class="glyphicon glyphicon-log-in text-success"></span> Login</a></li>
+    </ul>
+    {% endif %}
   </div>
 </nav>
 

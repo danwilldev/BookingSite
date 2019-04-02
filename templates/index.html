@@ -7,33 +7,27 @@
 <div class="container text-center">
   <h2>Upcoming Classes</h2>
 </div>
-{% for item in title %}
-<div class="container">           
+<div class="container">     
+    </div>
+   </form>
+    </div>      
   <table class="table table-hover">
+    {% for x in details %}
     <thead>
       <tr>
-        <th>{{item}}</th>
+        <th>{{x[0]}}</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>Class Name</td>
-        <td>Class Time</td>
-        <td>Class Location</td>
-      </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>july@example.com</td>
+        <td>{{x[1]}}</td>
+        <td>{{x[2]}}</td>
+        <td>Location: {{x[3]}}</td>
       </tr>
     </tbody>
+    {% endfor %}
   </table>
 </div>
-{% endfor %}
+
 
 {% endblock %}

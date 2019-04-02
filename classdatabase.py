@@ -1,5 +1,5 @@
 import sqlite3
-conn = sqlite3.connect('C:/Users/danwi/Desktop/classdatabase.db', check_same_thread=False)
+conn = sqlite3.connect('data/classdatabase.db', check_same_thread=False)
 c = conn.cursor()
 
 class ClassDatabase():

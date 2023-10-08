@@ -60,3 +60,22 @@ class Database():
                 return False
         except:
             return False
+
+    @staticmethod
+    def uuid(email):
+        try:
+            c.execute('SELECT * FROM users WHERE email=?',(email,))
+            item = c.fetchone()
+            return str(item[0])
+        except:
+            return False
+
+    @staticmethod
+    def userdetails(uuid):
+        try:
+            c.execute('SELECT * FROM usersinfo WHERE userid=?',(uuid,))
+            item = c.fetchone()
+            details = [item[1], item[2], item[3]]
+            return details
+        except:
+            return False
